@@ -3,198 +3,182 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Admin - Karang Taruna Cilosari Barat</title>
+  <title>Admin Portal - Karang Taruna Cilosari Barat RT01/RW08</title>
   <link rel="icon" type="image/png" href="./assets/logo.png" />
   <link rel="stylesheet" href="./css/style.css" />
   <style>
-    body { background: #f9fafb; color: #111; font-family: Inter, sans-serif; margin:0; }
+    body { background:#f9fafb; color:#111; font-family:Inter, sans-serif; margin:0; }
     header { background:#0e4c92; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
-    header h1 { font-size:1.2rem; margin:0; letter-spacing:.5px; }
+    header h1 { font-size:1.1rem; margin:0; letter-spacing:.5px; }
     main { padding:2rem; max-width:1100px; margin:auto; }
-    h2,h3 { color:#0e4c92; }
-    section.card { background:#fff; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,.06); margin-bottom:2rem; padding:1.2rem 1.6rem; }
-    .muted { color:#6b7280; font-size:.9rem; }
+    section.card { background:#fff; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,.06); margin-bottom:2rem; padding:1.4rem 1.8rem; }
     .form-grid { display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:1rem; }
-    label { display:block; font-weight:600; margin-bottom:.3rem; }
-    input,select,textarea { width:100%; padding:.5rem .7rem; border:1px solid #d1d5db; border-radius:8px; font:inherit; }
-    textarea { min-height:80px; resize:vertical; }
+    label { font-weight:600; margin-bottom:.3rem; display:block; }
+    input,select,textarea { width:100%; padding:.55rem .7rem; border:1px solid #d1d5db; border-radius:8px; font:inherit; }
     .btn { display:inline-block; padding:.6rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; border:none; }
     .btn.primary { background:#f6c445; color:#111; }
     .btn.outline { background:#fff; border:1px solid #ccc; }
-    .btn.small { padding:.3rem .7rem; font-size:.85rem; }
+    .btn.small { padding:.4rem .7rem; font-size:.85rem; }
     table { width:100%; border-collapse:collapse; margin-top:1rem; }
     th,td { border-bottom:1px solid #e5e7eb; padding:.5rem .7rem; text-align:left; font-size:.9rem; }
-    th { background:#f3f4f6; font-weight:700; }
-    .card h3 { margin-top:0; }
-    #logoutBtn { background:#e11d48; color:#fff; border:none; }
+    th { background:#f3f4f6; }
     .hidden { display:none!important; }
-    .success { color:green; font-weight:600; margin-top:.3rem; }
+    .muted { color:#6b7280; font-size:.9rem; }
+    #logoutBtn { background:#e11d48; color:#fff; border:none; }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Dashboard Admin – Karang Taruna Cilosari Barat RT01/RW08</h1>
-    <button id="logoutBtn" class="btn small">Keluar</button>
+    <h1>Admin Karang Taruna Cilosari Barat RT01/RW08</h1>
+    <button id="logoutBtn" class="btn small hidden">Keluar</button>
   </header>
 
   <main>
     <!-- === LOGIN === -->
     <section id="loginSection" class="card">
       <h3>Masuk Admin</h3>
-      <p class="muted">Gunakan email dan password akun admin Firebase</p>
+      <p class="muted">Gunakan akun yang telah terdaftar</p>
       <form id="loginForm" class="form-grid">
-        <div>
-          <label>Email</label>
-          <input type="email" name="email" placeholder="email@domain.com" required />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" name="password" placeholder="********" required />
-        </div>
+        <div><label>Email<input type="email" name="email" required></label></div>
+        <div><label>Password<input type="password" name="password" required></label></div>
         <div><button class="btn primary" type="submit">Masuk</button></div>
       </form>
       <p id="loginMsg" class="muted"></p>
+      <p><button id="gotoRegister" class="btn outline small">Belum punya akun? Daftar</button></p>
+    </section>
+
+    <!-- === REGISTER === -->
+    <section id="registerSection" class="card hidden">
+      <h3>Daftar Akun Baru</h3>
+      <p class="muted">Buat akun admin baru (role default: viewer)</p>
+      <form id="registerForm" class="form-grid">
+        <div><label>Nama Lengkap<input type="text" name="name" required></label></div>
+        <div><label>Email<input type="email" name="email" required></label></div>
+        <div><label>Password<input type="password" name="password" minlength="6" required></label></div>
+        <div><button class="btn primary" type="submit">Daftar</button></div>
+      </form>
+      <p id="registerMsg" class="muted"></p>
+      <p><button id="gotoLogin" class="btn outline small">Sudah punya akun? Login</button></p>
     </section>
 
     <!-- === DASHBOARD === -->
     <section id="dashboardSection" class="hidden">
-      <!-- Buat akun login baru -->
-      <section class="card" data-roles="super_admin">
-        <h3>🔑 Buat Akun Login Baru</h3>
-        <p class="muted">Membuat akun di Firebase Authentication dan Firestore `/users/{uid}`.</p>
-        <form id="formCreateAuth" class="form-grid">
-          <div><label>Nama Lengkap<input name="name" required></label></div>
-          <div><label>Email<input name="email" type="email" required></label></div>
-          <div><label>Password<input name="password" type="password" minlength="6" required></label></div>
-          <div>
-            <label>Role
-              <select name="role" required>
-                <option value="viewer">viewer</option>
-                <option value="admin_berita">admin_berita</option>
-                <option value="admin_program">admin_program</option>
-                <option value="admin_pkk">admin_pkk</option>
-                <option value="super_admin">super_admin</option>
-              </select>
-            </label>
-          </div>
-          <div><button class="btn primary" type="submit">Buat Akun</button></div>
-        </form>
-        <p id="createAuthNote" class="muted" style="display:none"></p>
+      <section class="card">
+        <h3>Selamat Datang, <span id="userName"></span>!</h3>
+        <p class="muted">Peran: <span id="userRole"></span></p>
+        <p>Gunakan menu di bawah untuk mengelola konten dan akun.</p>
       </section>
 
-      <!-- Manajemen Akun -->
-      <section class="card" data-roles="super_admin">
-        <h3>👥 Manajemen Akun & Role</h3>
-        <p class="muted">Super Admin dapat melihat, ubah role, hapus, atau reset password user.</p>
-        <form id="formUser" class="form-grid">
-          <div><label>Nama<input name="name" placeholder="Nama Pengguna"></label></div>
-          <div><label>Email<input name="email" type="email" required></label></div>
-          <div>
-            <label>Role
-              <select name="role" required>
-                <option value="viewer">viewer</option>
-                <option value="admin_berita">admin_berita</option>
-                <option value="admin_program">admin_program</option>
-                <option value="admin_pkk">admin_pkk</option>
-                <option value="super_admin">super_admin</option>
-              </select>
-            </label>
-          </div>
-          <div><button class="btn outline" type="submit">Tambah/Perbarui</button></div>
-        </form>
-
-        <table class="table" id="tableUsers">
-          <thead>
-            <tr>
-              <th>Nama</th><th>Email</th><th>Role</th><th>UID</th>
-              <th>Aksi</th><th>Keamanan</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
-
-      <!-- Log Aktivitas -->
-      <section class="card" data-roles="super_admin,admin_berita,admin_program,admin_pkk">
-        <h3>📜 Log Aktivitas</h3>
-        <p class="muted">Semua aksi penting disimpan di Firestore `/logs`.</p>
-        <div class="form-grid">
-          <div>
-            <label>Filter Aksi
-              <select id="logFilter">
-                <option value="">Semua</option>
-                <option value="createUser">createUser</option>
-                <option value="updateRole">updateRole</option>
-                <option value="resetPassword">resetPassword</option>
-                <option value="addNews">addNews</option>
-                <option value="addProgram">addProgram</option>
-                <option value="addStruktur">addStruktur</option>
-                <option value="addGaleri">addGaleri</option>
-                <option value="updateHeroVideo">updateHeroVideo</option>
-                <option value="deleteNews">deleteNews</option>
-                <option value="deleteProgram">deleteProgram</option>
-                <option value="deleteStruktur">deleteStruktur</option>
-                <option value="deleteGaleri">deleteGaleri</option>
-              </select>
-            </label>
-          </div>
-          <div><button id="btnRefreshLogs" class="btn outline" type="button">Muat Ulang</button></div>
-        </div>
-        <table class="table" id="tableLogs">
-          <thead><tr><th>Waktu</th><th>Admin</th><th>Aksi</th><th>Target</th></tr></thead>
-          <tbody></tbody>
-        </table>
-      </section>
-
-      <!-- Berita -->
-      <section class="card" data-roles="super_admin,admin_berita">
-        <h3>📰 Berita & Pengumuman</h3>
-        <form id="formBerita" class="form-grid">
-          <div><label>Judul<input name="judul" required></label></div>
-          <div><label>Isi<textarea name="isi" required></textarea></label></div>
-          <div><button class="btn primary" type="submit">Tambah</button></div>
-        </form>
-        <div id="listBerita"></div>
-      </section>
-
-      <!-- Program -->
-      <section class="card" data-roles="super_admin,admin_program">
-        <h3>📅 Program & Kegiatan</h3>
-        <form id="formProgram" class="form-grid">
-          <div><label>Judul<input name="judul" required></label></div>
-          <div><label>Deskripsi<textarea name="deskripsi" required></textarea></label></div>
-          <div><button class="btn primary" type="submit">Tambah</button></div>
-        </form>
-        <div id="listProgram"></div>
-      </section>
-
-      <!-- Struktur -->
-      <section class="card" data-roles="super_admin,admin_pkk">
-        <h3>👤 Struktur Organisasi</h3>
-        <form id="formStruktur" class="form-grid">
-          <div><label>Nama<input name="nama" required></label></div>
-          <div><label>Jabatan<input name="jabatan" required></label></div>
-          <div><button class="btn primary" type="submit">Tambah</button></div>
-        </form>
-        <div id="listStruktur"></div>
-      </section>
-
-      <!-- Galeri -->
-      <section class="card" data-roles="super_admin,admin_berita,admin_program">
-        <h3>🖼️ Galeri</h3>
-        <form id="formGaleri" class="form-grid">
-          <div><label>URL Gambar<input name="url" placeholder="https://drive.google.com/..." required></label></div>
-          <div><label>Caption<input name="caption"></label></div>
-          <div><button class="btn primary" type="submit">Tambah</button></div>
-        </form>
-        <div id="listGaleri"></div>
+      <!-- Contoh data -->
+      <section class="card">
+        <h3>📜 Data Contoh</h3>
+        <p>Berita, Program, Struktur, dan Log aktivitas akan muncul di sini seperti versi sebelumnya.</p>
       </section>
     </section>
   </main>
 
-  <!-- JS -->
-  <script type="module" src="./js/firebase.js"></script>
-  <script type="module" src="./js/admin.js"></script>
+  <!-- SCRIPT -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, setDoc, getDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    // Firebase Config
+    const config = window.__ENV || {
+      apiKey: "ISI_APIKEY_KAMU",
+      authDomain: "ISI_AUTHDOMAIN",
+      projectId: "ISI_PROJECTID",
+      storageBucket: "ISI_STORAGEBUCKET",
+      messagingSenderId: "ISI_MSG_ID",
+      appId: "ISI_APPID"
+    };
+
+    const app = initializeApp(config);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Elemen
+    const loginSection = document.getElementById("loginSection");
+    const registerSection = document.getElementById("registerSection");
+    const dashboardSection = document.getElementById("dashboardSection");
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userName = document.getElementById("userName");
+    const userRole = document.getElementById("userRole");
+
+    // Navigasi antar form
+    document.getElementById("gotoRegister").onclick = () => {
+      loginSection.classList.add("hidden");
+      registerSection.classList.remove("hidden");
+    };
+    document.getElementById("gotoLogin").onclick = () => {
+      registerSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+    };
+
+    // === REGISTER ===
+    registerForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = e.target.name.value;
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      try {
+        const userCred = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCred.user, { displayName: name });
+        await setDoc(doc(db, "users", userCred.user.uid), {
+          name,
+          email,
+          role: "viewer",
+          createdAt: serverTimestamp(),
+        });
+        alert("Pendaftaran berhasil! Silakan login.");
+        registerSection.classList.add("hidden");
+        loginSection.classList.remove("hidden");
+      } catch (err) {
+        alert("Gagal daftar: " + err.message);
+      }
+    });
+
+    // === LOGIN ===
+    loginForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = e.target.email.value;
+      const password = e.target.password.value;
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+      } catch (err) {
+        alert("Login gagal: " + err.message);
+      }
+    });
+
+    // === AUTH STATE ===
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // cek role dari Firestore
+        const ref = doc(db, "users", user.uid);
+        const snap = await getDoc(ref);
+        const data = snap.exists() ? snap.data() : { role: "viewer" };
+        userName.textContent = user.displayName || user.email;
+        userRole.textContent = data.role;
+        loginSection.classList.add("hidden");
+        registerSection.classList.add("hidden");
+        dashboardSection.classList.remove("hidden");
+        logoutBtn.classList.remove("hidden");
+      } else {
+        dashboardSection.classList.add("hidden");
+        loginSection.classList.remove("hidden");
+        logoutBtn.classList.add("hidden");
+      }
+    });
+
+    // === LOGOUT ===
+    logoutBtn.onclick = async () => {
+      await signOut(auth);
+      dashboardSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+    };
+  </script>
 </body>
 </html>
