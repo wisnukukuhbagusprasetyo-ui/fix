@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Dashboard Admin — Karang Taruna Cilosari Barat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"/>
+    <link rel="stylesheet" href="./css/style.css" />
+    <script src="./env.js"></script>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="container">
+        <span>Dashboard Admin — KARTAR Cilosari Barat</span>
+        <div class="topbar-links">
+          <a href="./index.html">← Kembali ke Publik</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="container" style="padding:2rem 0">
+      <section id="notAuthed" class="card" style="max-width:520px; margin: 1rem auto;">
+        <h2>Masuk Admin</h2>
+        <form id="loginForm">
+          <label>Email<input type="email" name="email" required placeholder="admin@karangtaruna-cilosari.com"></label>
+          <label>Password<input type="password" name="password" required></label>
+          <button class="btn primary" type="submit">Masuk</button>
+          <p class="muted">Hubungi Super Admin untuk dibuatkan akun & role.</p>
+        </form>
+      </section>
+
+      <section id="authed" class="card" style="display:none">
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:.8rem; flex-wrap:wrap">
+          <div>
+            <h2 style="margin:.2rem 0">Halo, <span id="emailBadge"></span></h2>
+            <p class="muted">Role: <strong id="roleBadge"></strong></p>
+          </div>
+          <div style="display:flex; gap:.5rem">
+            <a class="btn outline" href="./index.html">Lihat Publik</a>
+            <button id="btnLogout" class="btn">Keluar</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings: Hero TikTok -->
+      <section class="card" data-roles="super_admin,admin_berita">
+        <h3>Video Hero TikTok</h3>
+        <p class="muted">Tempel URL TikTok (boleh URL video biasa, nanti otomatis jadi /embed/). Contoh: <code>https://www.tiktok.com/@akun/video/7286...</code></p>
+        <div class="form-grid">
+          <div style="grid-column:1 / -1">
+            <label>URL Video TikTok<input id="heroVideoUrl" placeholder="https://www.tiktok.com/@akun/video/XXXXXXXXXXXX"></label>
+          </div>
+          <div>
+            <button id="btnSaveHeroVideo" class="btn primary" type="button">Simpan</button>
+          </div>
+        </div>
+      </section>
+
+      
+      <!-- Role Management (Firestore only) -->
+      <section class="card" data-roles="super_admin">
+        <h3>👥 Manajemen Akun & Role</h3>
+        <h4>Buat Akun Baru 🔑</h4>
+        <p class="muted">Hanya Super Admin. Buat/ubah/hapus data user di koleksi <code>/users</code>. (Pembuatan akun login tetap lewat Firebase Console.)</p>
+        <form id="formUser" class="form-grid">
+          <div><label>Password<input name="password" type="password" placeholder="Minimal 6 karakter" required></label></div>
+          <div><label>Nama<input name="name" placeholder="Nama Pengguna"></label></div>
+          <div><label>Email<input name="email" type="email" placeholder="email@domain.com" required></label></div>
+          <div>
+            <label>Role
+              <select name="role" required>
+                <option value="viewer">viewer</option>
+                <option value="admin_berita">admin_berita</option>
+                <option value="admin_program">admin_program</option>
+                <option value="admin_pkk">admin_pkk</option>
+                <option value="super_admin">super_admin</option>
+              </select>
+            </label>
+          </div>
+          <div><button class="btn primary" type="submit">Tambah/Perbarui</button></div>
+        </form>
+        <table class="table" id="tableUsers">
+          <thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>UID</th><th>Aksi</th><th>Keamanan</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+
+      <!-- Berita -->
+      <section class="card" data-roles="admin_berita,admin_program,admin_pkk,admin_bendahara">
+        <h3>Berita & Pengumuman</h3>
+        <form id="formBerita" class="form-grid">
+          <div><label>Judul<input name="judul" required></label></div>
+          <div><label>Tanggal<input type="date" name="tanggal" required></label></div>
+          <div style="grid-column:1 / -1"><label>Ringkasan<textarea name="ringkasan" rows="3" required></textarea></label></div>
+          <div style="grid-column:1 / -1"><label>Link Dokumen (Google Drive)<input name="linkDokumen" placeholder="https://drive.google.com/file/d/ID/view"></label></div>
+          <div><button class="btn primary" type="submit">Simpan</button></div>
+        </form>
+        <table class="table" id="tableBerita">
+          <thead><tr><th>Judul</th><th>Tanggal</th><th>Ringkasan</th><th>Dokumen</th><th>Aksi</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Program -->
+      <section class="card" data-roles="admin_program,admin_pkk">
+        <h3>Program & Kegiatan</h3>
+        <form id="formProgram" class="form-grid">
+          <div><label>Urutan<input type="number" name="urutan" value="0" required></label></div>
+          <div><label>Judul<input name="judul" required></label></div>
+          <div style="grid-column:1 / -1"><label>Deskripsi<textarea name="deskripsi" rows="3"></textarea></label></div>
+          <div><button class="btn primary" type="submit">Simpan</button></div>
+        </form>
+        <table class="table" id="tableProgram">
+          <thead><tr><th>Urutan</th><th>Judul</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Struktur -->
+      <section class="card" data-roles="super_admin,admin_program,admin_pkk">
+        <h3>Struktur Organisasi</h3>
+        <form id="formStruktur" class="form-grid">
+          <div><label>Urutan<input type="number" name="urutan" value="0" required></label></div>
+          <div><label>Jabatan<input name="jabatan" placeholder="Ketua" required></label></div>
+          <div><label>Nama<input name="nama" placeholder="Nama Pengurus" required></label></div>
+          <div style="grid-column:1 / -1"><label>Foto (GDrive URL/ID)<input name="foto" placeholder="https://drive.google.com/file/d/ID/view"></label></div>
+          <div><button class="btn primary" type="submit">Simpan</button></div>
+        </form>
+        <table class="table" id="tableStruktur">
+          <thead><tr><th>Urutan</th><th>Jabatan</th><th>Nama</th><th>Foto</th><th>Aksi</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Galeri -->
+      <section class="card" data-roles="admin_program,admin_pkk,admin_berita">
+        <h3>Galeri</h3>
+        <form id="formGaleri" class="form-grid">
+          <div><label>Caption<input name="caption" placeholder="Judul Foto"></label></div>
+          <div style="grid-column:1 / -1"><label>Gambar (GDrive URL/ID)<input name="gambar" placeholder="https://drive.google.com/file/d/ID/view" required></label></div>
+          <div><button class="btn primary" type="submit">Simpan</button></div>
+        </form>
+        <table class="table" id="tableGaleri">
+          <thead><tr><th>Caption</th><th>Gambar</th><th>Aksi</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+    
+      <!-- Activity Logs -->
+      <section class="card" data-roles="super_admin,admin_berita,admin_program,admin_pkk">
+        <h3>📜 Log Aktivitas</h3>
+        <p class="muted">Semua aksi penting dicatat di Firestore <code>/logs</code>. Super Admin melihat semua log; admin lain melihat log miliknya.</p>
+        <div class="form-grid">
+          <div>
+            <label>Filter Aksi
+              <select id="logFilter">
+                <option value="">Semua</option>
+                <option value="createUser">createUser</option>
+                <option value="updateRole">updateRole</option>
+                <option value="resetPassword">resetPassword</option>
+                <option value="addNews">addNews</option>
+                <option value="addProgram">addProgram</option>
+                <option value="addStruktur">addStruktur</option>
+                <option value="addGaleri">addGaleri</option>
+                <option value="deleteNews">deleteNews</option>
+                <option value="deleteProgram">deleteProgram</option>
+                <option value="deleteStruktur">deleteStruktur</option>
+                <option value="deleteGaleri">deleteGaleri</option>
+                <option value="updateHeroVideo">updateHeroVideo</option>
+              </select>
+            </label>
+          </div>
+          <div><button id="btnRefreshLogs" class="btn outline" type="button">Muat Ulang</button></div>
+        </div>
+        <table class="table" id="tableLogs">
+          <thead><tr><th>Waktu</th><th>Admin</th><th>Aksi</th><th>Target</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+    </main>
+
+    <script type="module" src="./js/admin.js"></script>
+  </body>
+</html>

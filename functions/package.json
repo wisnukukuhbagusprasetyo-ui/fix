@@ -1,0 +1,17 @@
+{
+  "name": "kartar-cilosari-functions",
+  "engines": {
+    "node": "18"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "echo 'no build step'",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^5.0.1",
+    "cors": "^2.8.5"
+  }
+}

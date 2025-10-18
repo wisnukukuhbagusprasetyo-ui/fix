@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80">
+  <defs><linearGradient id="g" x1="0" x2="1"><stop stop-color="#0e4c92"/><stop offset="1" stop-color="#f6c445"/></linearGradient></defs>
+  <rect width="320" height="80" rx="16" fill="url(#g)"/>
+  <g fill="#fff" opacity=".98">
+    <path d="M24 52h72v12H24zM40 16h40v28H40z"/>
+    <text x="120" y="52" font-size="20" font-family="Inter, Arial" font-weight="800">KARTAR CILOSARI BARAT</text>
+  </g>
+</svg>

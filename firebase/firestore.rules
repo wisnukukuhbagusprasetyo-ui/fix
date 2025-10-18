@@ -1,0 +1,49 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function inRoles(roles) {
+      return request.auth != null &&
+             get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in roles;
+    }
+
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if inRoles(['super_admin','admin_berita']);
+    }
+
+    match /berita/{doc} {
+      allow read: if true;
+      allow create, update, delete: if inRoles(['super_admin','admin_berita','admin_program','admin_pkk']);
+    }
+    match /program/{doc} {
+      allow read: if true;
+      allow create, update, delete: if inRoles(['super_admin','admin_program','admin_pkk']);
+    }
+    match /struktur/{doc} {
+      allow read: if true;
+      allow create, update, delete: if inRoles(['super_admin','admin_program','admin_pkk']);
+    }
+    match /galeri/{doc} {
+      allow read: if true;
+      allow create, update, delete: if inRoles(['super_admin','admin_program','admin_pkk','admin_berita']);
+    }
+    
+    // Activity logs
+    match /logs/{id} {
+      // anyone logged-in can write a log for their action
+      allow create: if request.auth != null;
+      // super_admin can read all logs
+      // others can read only their own logs (by userUid field)
+      allow read: if inRoles(['super_admin']) || (request.auth != null && resource.data.userUid == request.auth.uid);
+    }
+      allow read: if true;
+      allow create, update, delete: if inRoles(['super_admin','admin_program','admin_pkk','admin_berita']);
+    }
+
+    match /users/{uid} {
+      allow read: if request.auth != null && request.auth.uid == uid || inRoles(['super_admin']);
+      allow create: if request.auth != null && request.auth.uid == uid || inRoles(['super_admin']);
+      allow update, delete: if request.auth != null && request.auth.uid == uid || inRoles(['super_admin']);
+    }
+  }
+}
