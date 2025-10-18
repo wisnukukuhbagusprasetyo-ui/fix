@@ -3,183 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Karang Taruna Cilosari Barat RT01/RW08 Kelurahan Kemijen, Kecamatan Semarang Timur" />
-  <title>Karang Taruna Cilosari Barat RT01/RW08 - Kemijen, Semarang Timur</title>
-
-  <!-- favicon -->
+  <title>Dashboard Admin - Karang Taruna Cilosari Barat</title>
   <link rel="icon" type="image/png" href="./assets/logo.png" />
-
-  <!-- style -->
   <link rel="stylesheet" href="./css/style.css" />
-
-  <!-- font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { background: #f9fafb; color: #111; font-family: Inter, sans-serif; margin:0; }
+    header { background:#0e4c92; color:#fff; padding:1rem 2rem; display:flex; justify-content:space-between; align-items:center; }
+    header h1 { font-size:1.2rem; margin:0; letter-spacing:.5px; }
+    main { padding:2rem; max-width:1100px; margin:auto; }
+    h2,h3 { color:#0e4c92; }
+    section.card { background:#fff; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,.06); margin-bottom:2rem; padding:1.2rem 1.6rem; }
+    .muted { color:#6b7280; font-size:.9rem; }
+    .form-grid { display:grid; gap:.8rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); margin-top:1rem; }
+    label { display:block; font-weight:600; margin-bottom:.3rem; }
+    input,select,textarea { width:100%; padding:.5rem .7rem; border:1px solid #d1d5db; border-radius:8px; font:inherit; }
+    textarea { min-height:80px; resize:vertical; }
+    .btn { display:inline-block; padding:.6rem 1.1rem; border-radius:8px; font-weight:700; cursor:pointer; border:none; }
+    .btn.primary { background:#f6c445; color:#111; }
+    .btn.outline { background:#fff; border:1px solid #ccc; }
+    .btn.small { padding:.3rem .7rem; font-size:.85rem; }
+    table { width:100%; border-collapse:collapse; margin-top:1rem; }
+    th,td { border-bottom:1px solid #e5e7eb; padding:.5rem .7rem; text-align:left; font-size:.9rem; }
+    th { background:#f3f4f6; font-weight:700; }
+    .card h3 { margin-top:0; }
+    #logoutBtn { background:#e11d48; color:#fff; border:none; }
+    .hidden { display:none!important; }
+    .success { color:green; font-weight:600; margin-top:.3rem; }
+  </style>
 </head>
+
 <body>
+  <header>
+    <h1>Dashboard Admin – Karang Taruna Cilosari Barat RT01/RW08</h1>
+    <button id="logoutBtn" class="btn small">Keluar</button>
+  </header>
 
-  <!-- === TOPBAR === -->
-  <div class="topbar">
-    <div class="container">
-      <span>Karang Taruna Cilosari Barat RT01/RW08</span>
-      <div>
-        <a href="#admin">Admin</a>
-        <a href="#kontak">Kontak</a>
-      </div>
-    </div>
-  </div>
+  <main>
+    <!-- === LOGIN === -->
+    <section id="loginSection" class="card">
+      <h3>Masuk Admin</h3>
+      <p class="muted">Gunakan email dan password akun admin Firebase</p>
+      <form id="loginForm" class="form-grid">
+        <div>
+          <label>Email</label>
+          <input type="email" name="email" placeholder="email@domain.com" required />
+        </div>
+        <div>
+          <label>Password</label>
+          <input type="password" name="password" placeholder="********" required />
+        </div>
+        <div><button class="btn primary" type="submit">Masuk</button></div>
+      </form>
+      <p id="loginMsg" class="muted"></p>
+    </section>
 
-  <!-- === NAVBAR === -->
-  <nav class="navbar">
-    <div class="container nav-inner">
-      <a href="#" class="brand">
-        <img src="./assets/logo.png" alt="Logo" />
-        <span>KARTAR CILOSARI BARAT</span>
-      </a>
-      <button class="nav-toggle" id="navToggle">☰</button>
-      <div class="nav-links" id="navLinks">
-        <a href="#beranda" class="active">Beranda</a>
-        <a href="#program">Program</a>
-        <a href="#berita">Berita</a>
-        <a href="#galeri">Galeri</a>
-        <a href="#struktur">Struktur</a>
-        <a href="#kontak">Kontak</a>
-      </div>
-    </div>
-    <div class="mobile-menu" id="mobileMenu">
-      <a href="#beranda">Beranda</a>
-      <a href="#program">Program</a>
-      <a href="#berita">Berita</a>
-      <a href="#galeri">Galeri</a>
-      <a href="#struktur">Struktur</a>
-      <a href="#kontak">Kontak</a>
-    </div>
-  </nav>
+    <!-- === DASHBOARD === -->
+    <section id="dashboardSection" class="hidden">
+      <!-- Buat akun login baru -->
+      <section class="card" data-roles="super_admin">
+        <h3>🔑 Buat Akun Login Baru</h3>
+        <p class="muted">Membuat akun di Firebase Authentication dan Firestore `/users/{uid}`.</p>
+        <form id="formCreateAuth" class="form-grid">
+          <div><label>Nama Lengkap<input name="name" required></label></div>
+          <div><label>Email<input name="email" type="email" required></label></div>
+          <div><label>Password<input name="password" type="password" minlength="6" required></label></div>
+          <div>
+            <label>Role
+              <select name="role" required>
+                <option value="viewer">viewer</option>
+                <option value="admin_berita">admin_berita</option>
+                <option value="admin_program">admin_program</option>
+                <option value="admin_pkk">admin_pkk</option>
+                <option value="super_admin">super_admin</option>
+              </select>
+            </label>
+          </div>
+          <div><button class="btn primary" type="submit">Buat Akun</button></div>
+        </form>
+        <p id="createAuthNote" class="muted" style="display:none"></p>
+      </section>
 
-  <!-- === HERO SECTION (VIDEO TANPA PRATINJAU) === -->
-  <section class="hero" id="beranda">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="./assets/hero-video.mp4" type="video/mp4">
-      Browser Anda tidak mendukung tag video.
-    </video>
-    <div class="hero-overlay"></div>
+      <!-- Manajemen Akun -->
+      <section class="card" data-roles="super_admin">
+        <h3>👥 Manajemen Akun & Role</h3>
+        <p class="muted">Super Admin dapat melihat, ubah role, hapus, atau reset password user.</p>
+        <form id="formUser" class="form-grid">
+          <div><label>Nama<input name="name" placeholder="Nama Pengguna"></label></div>
+          <div><label>Email<input name="email" type="email" required></label></div>
+          <div>
+            <label>Role
+              <select name="role" required>
+                <option value="viewer">viewer</option>
+                <option value="admin_berita">admin_berita</option>
+                <option value="admin_program">admin_program</option>
+                <option value="admin_pkk">admin_pkk</option>
+                <option value="super_admin">super_admin</option>
+              </select>
+            </label>
+          </div>
+          <div><button class="btn outline" type="submit">Tambah/Perbarui</button></div>
+        </form>
 
-    <div class="container hero-content">
-      <h1>Karang Taruna Cilosari Barat RT01/RW08</h1>
-      <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
-      <p><em>"Bersatu, Berdaya, Berkarya."</em></p>
-      <div class="hero-cta">
-        <a href="#berita" class="btn primary">Lihat Pengumuman</a>
-        <a href="#galeri" class="btn light">Jelajah Galeri</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><span>24</span><small>Kegiatan/Tahun</small></div>
-        <div class="stat"><span>85</span><small>Relawan Aktif</small></div>
-        <div class="stat"><span>11</span><small>RT/RW Kolaborator</small></div>
-      </div>
-    </div>
-  </section>
+        <table class="table" id="tableUsers">
+          <thead>
+            <tr>
+              <th>Nama</th><th>Email</th><th>Role</th><th>UID</th>
+              <th>Aksi</th><th>Keamanan</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
 
-  <!-- === PROGRAM === -->
-  <section class="section alt" id="program">
-    <div class="container">
-      <div class="section-header">
-        <h2>Program & Kegiatan</h2>
-        <p>Kegiatan tahunan Karang Taruna Cilosari Barat</p>
-      </div>
-      <div class="grid programs" id="programList">
-        <!-- data dari Firestore -->
-      </div>
-    </div>
-  </section>
+      <!-- Log Aktivitas -->
+      <section class="card" data-roles="super_admin,admin_berita,admin_program,admin_pkk">
+        <h3>📜 Log Aktivitas</h3>
+        <p class="muted">Semua aksi penting disimpan di Firestore `/logs`.</p>
+        <div class="form-grid">
+          <div>
+            <label>Filter Aksi
+              <select id="logFilter">
+                <option value="">Semua</option>
+                <option value="createUser">createUser</option>
+                <option value="updateRole">updateRole</option>
+                <option value="resetPassword">resetPassword</option>
+                <option value="addNews">addNews</option>
+                <option value="addProgram">addProgram</option>
+                <option value="addStruktur">addStruktur</option>
+                <option value="addGaleri">addGaleri</option>
+                <option value="updateHeroVideo">updateHeroVideo</option>
+                <option value="deleteNews">deleteNews</option>
+                <option value="deleteProgram">deleteProgram</option>
+                <option value="deleteStruktur">deleteStruktur</option>
+                <option value="deleteGaleri">deleteGaleri</option>
+              </select>
+            </label>
+          </div>
+          <div><button id="btnRefreshLogs" class="btn outline" type="button">Muat Ulang</button></div>
+        </div>
+        <table class="table" id="tableLogs">
+          <thead><tr><th>Waktu</th><th>Admin</th><th>Aksi</th><th>Target</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </section>
 
-  <!-- === BERITA === -->
-  <section class="section" id="berita">
-    <div class="container">
-      <div class="section-header">
-        <h2>Berita & Pengumuman</h2>
-        <p>Informasi terbaru seputar kegiatan Karang Taruna</p>
-      </div>
-      <div class="grid news" id="beritaList">
-        <!-- data dari Firestore -->
-      </div>
-    </div>
-  </section>
+      <!-- Berita -->
+      <section class="card" data-roles="super_admin,admin_berita">
+        <h3>📰 Berita & Pengumuman</h3>
+        <form id="formBerita" class="form-grid">
+          <div><label>Judul<input name="judul" required></label></div>
+          <div><label>Isi<textarea name="isi" required></textarea></label></div>
+          <div><button class="btn primary" type="submit">Tambah</button></div>
+        </form>
+        <div id="listBerita"></div>
+      </section>
 
-  <!-- === GALERI === -->
-  <section class="section alt" id="galeri">
-    <div class="container">
-      <div class="section-header">
-        <h2>Galeri Kegiatan</h2>
-        <p>Potret kebersamaan dan kegiatan sosial warga</p>
-      </div>
-      <div class="masonry" id="galeriList">
-        <!-- gambar dari Google Drive -->
-      </div>
-    </div>
-  </section>
+      <!-- Program -->
+      <section class="card" data-roles="super_admin,admin_program">
+        <h3>📅 Program & Kegiatan</h3>
+        <form id="formProgram" class="form-grid">
+          <div><label>Judul<input name="judul" required></label></div>
+          <div><label>Deskripsi<textarea name="deskripsi" required></textarea></label></div>
+          <div><button class="btn primary" type="submit">Tambah</button></div>
+        </form>
+        <div id="listProgram"></div>
+      </section>
 
-  <!-- === STRUKTUR === -->
-  <section class="section" id="struktur">
-    <div class="container">
-      <div class="section-header">
-        <h2>Struktur Organisasi</h2>
-        <p>Susunan Pengurus Karang Taruna Cilosari Barat</p>
-      </div>
-      <div class="org-grid" id="strukturList">
-        <!-- data dari Firestore -->
-      </div>
-    </div>
-  </section>
+      <!-- Struktur -->
+      <section class="card" data-roles="super_admin,admin_pkk">
+        <h3>👤 Struktur Organisasi</h3>
+        <form id="formStruktur" class="form-grid">
+          <div><label>Nama<input name="nama" required></label></div>
+          <div><label>Jabatan<input name="jabatan" required></label></div>
+          <div><button class="btn primary" type="submit">Tambah</button></div>
+        </form>
+        <div id="listStruktur"></div>
+      </section>
 
-  <!-- === KONTAK === -->
-  <section class="section alt" id="kontak">
-    <div class="container contact">
-      <div>
-        <h2>Hubungi Kami</h2>
-        <p>Alamat: Jl. Cilosari Barat RT01/RW08, Kelurahan Kemijen, Kecamatan Semarang Timur</p>
-        <p>WhatsApp: <a href="https://wa.me/6281234567890" target="_blank">+62 812 3456 7890</a></p>
-        <p>Instagram: <a href="https://www.instagram.com/karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
-        <p>TikTok: <a href="https://www.tiktok.com/@karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
-      </div>
-      <iframe 
-        src="https://www.google.com/maps?q=Kemijen,+Semarang+Timur&output=embed"
-        width="100%" height="260" style="border:0" allowfullscreen="" loading="lazy">
-      </iframe>
-    </div>
-  </section>
+      <!-- Galeri -->
+      <section class="card" data-roles="super_admin,admin_berita,admin_program">
+        <h3>🖼️ Galeri</h3>
+        <form id="formGaleri" class="form-grid">
+          <div><label>URL Gambar<input name="url" placeholder="https://drive.google.com/..." required></label></div>
+          <div><label>Caption<input name="caption"></label></div>
+          <div><button class="btn primary" type="submit">Tambah</button></div>
+        </form>
+        <div id="listGaleri"></div>
+      </section>
+    </section>
+  </main>
 
-  <!-- === FOOTER === -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <div>
-        <h3>Karang Taruna Cilosari Barat RT01/RW08</h3>
-        <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
-        <p><small>© 2025 Karang Taruna Cilosari Barat. All rights reserved.</small></p>
-      </div>
-      <div>
-        <a href="#beranda">Beranda</a><br>
-        <a href="#program">Program</a><br>
-        <a href="#berita">Berita</a><br>
-        <a href="#galeri">Galeri</a><br>
-        <a href="#struktur">Struktur</a><br>
-      </div>
-    </div>
-  </footer>
-
-  <!-- WA FLOAT -->
-  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
-    <img src="./assets/wa.png" alt="WA" />
-  </a>
-
-  <!-- SCRIPT -->
-  <script>
-    const navToggle=document.getElementById('navToggle');
-    const navLinks=document.getElementById('navLinks');
-    const mobileMenu=document.getElementById('mobileMenu');
-    navToggle.addEventListener('click',()=>{
-      mobileMenu.style.display=mobileMenu.style.display==='flex'?'none':'flex';
-    });
-  </script>
-
+  <!-- JS -->
+  <script type="module" src="./js/firebase.js"></script>
+  <script type="module" src="./js/admin.js"></script>
 </body>
 </html>
