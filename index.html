@@ -1,193 +1,185 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Karang Taruna Cilosari Barat RT01/RW08 — Kemijen</title>
-    <meta name="description" content="Portal resmi Karang Taruna Cilosari Barat RT01/RW08, Kelurahan Kemijen, Kecamatan Semarang Timur." />
-    <meta name="theme-color" content="#0e4c92">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml"/>
-    <link rel="stylesheet" href="./css/style.css" />
-    <script src="./env.js"></script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">Lewati ke konten utama</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Karang Taruna Cilosari Barat RT01/RW08 Kelurahan Kemijen, Kecamatan Semarang Timur" />
+  <title>Karang Taruna Cilosari Barat RT01/RW08 - Kemijen, Semarang Timur</title>
 
-    <div class="topbar">
-      <div class="container">
-        <span>Karang Taruna Cilosari Barat RT01/RW08</span>
-        <div class="topbar-links">
-          <a href="./admin.html">Admin</a>
-          <a href="#kontak">Kontak</a>
-        </div>
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="./assets/logo.png" />
+
+  <!-- style -->
+  <link rel="stylesheet" href="./css/style.css" />
+
+  <!-- font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- === TOPBAR === -->
+  <div class="topbar">
+    <div class="container">
+      <span>Karang Taruna Cilosari Barat RT01/RW08</span>
+      <div>
+        <a href="#admin">Admin</a>
+        <a href="#kontak">Kontak</a>
       </div>
     </div>
+  </div>
 
-    <header class="navbar">
-      <div class="container nav-inner">
-        <a class="brand" href="#">
-          <img src="./assets/logo-kt.svg" alt="Logo Karang Taruna Cilosari Barat" />
-          <span>KARTAR CILOSARI BARAT</span>
-        </a>
-        <nav class="nav-links">
-          <a href="#beranda">Beranda</a>
-          <a href="#program">Program</a>
-          <a href="#berita">Berita</a>
-          <a href="#galeri">Galeri</a>
-          <a href="#struktur">Struktur</a>
-          <a href="#kontak">Kontak</a>
-        </nav>
-        <button id="navToggle" class="nav-toggle" aria-expanded="false">☰</button>
-      </div>
-      <div id="mobileMenu" class="mobile-menu" hidden>
-        <a href="#beranda">Beranda</a>
+  <!-- === NAVBAR === -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="./assets/logo.png" alt="Logo" />
+        <span>KARTAR CILOSARI BARAT</span>
+      </a>
+      <button class="nav-toggle" id="navToggle">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#beranda" class="active">Beranda</a>
         <a href="#program">Program</a>
         <a href="#berita">Berita</a>
         <a href="#galeri">Galeri</a>
         <a href="#struktur">Struktur</a>
         <a href="#kontak">Kontak</a>
       </div>
-    </header>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#beranda">Beranda</a>
+      <a href="#program">Program</a>
+      <a href="#berita">Berita</a>
+      <a href="#galeri">Galeri</a>
+      <a href="#struktur">Struktur</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+  </nav>
 
-    <section class="hero" id="beranda" role="banner">
-      <div class="hero-media" aria-hidden="true">
-        <iframe id="heroIframe" title="Video TikTok Karang Taruna Cilosari" allow="encrypted-media;" allowfullscreen></iframe>
-        <div class="hero-overlay"></div>
+  <!-- === HERO SECTION (VIDEO TANPA PRATINJAU) === -->
+  <section class="hero" id="beranda">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="./assets/hero-video.mp4" type="video/mp4">
+      Browser Anda tidak mendukung tag video.
+    </video>
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-content">
+      <h1>Karang Taruna Cilosari Barat RT01/RW08</h1>
+      <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
+      <p><em>"Bersatu, Berdaya, Berkarya."</em></p>
+      <div class="hero-cta">
+        <a href="#berita" class="btn primary">Lihat Pengumuman</a>
+        <a href="#galeri" class="btn light">Jelajah Galeri</a>
       </div>
-      <div class="container hero-content">
-        <h1>Karang Taruna Cilosari Barat RT01/RW08</h1>
-        <p><strong>Kelurahan Kemijen, Kecamatan Semarang Timur</strong></p>
-        <p style="margin-top:.4rem">Motto: <em>“Bersatu, Berdaya, Berkarya.”</em></p>
-        <div class="hero-cta">
-          <a class="btn primary" href="#berita">Lihat Pengumuman</a>
-          <a class="btn light" href="#galeri">Jelajah Galeri</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><span id="statKegiatan">0</span><small>Kegiatan/Tahun</small></div>
-          <div class="stat"><span id="statRelawan">0</span><small>Relawan Aktif</small></div>
-          <div class="stat"><span id="statRtRw">0</span><small>RT/RW Kolaborator</small></div>
-        </div>
+      <div class="stats">
+        <div class="stat"><span>24</span><small>Kegiatan/Tahun</small></div>
+        <div class="stat"><span>85</span><small>Relawan Aktif</small></div>
+        <div class="stat"><span>11</span><small>RT/RW Kolaborator</small></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <main id="main">
-      <section class="section" id="program">
-        <div class="container">
-          <header class="section-header">
-            <h2>Program & Kegiatan</h2>
-            <p>Data program dikelola via Firestore (koleksi <code>program</code>).</p>
-          </header>
-          <div id="programGrid" class="grid programs"></div>
-        </div>
-      </section>
-
-      <section class="section alt" id="berita">
-        <div class="container">
-          <header class="section-header">
-            <h2>Berita & Pengumuman</h2>
-            <p>Terhubung realtime dari Firestore (koleksi <code>berita</code>).</p>
-          </header>
-          <div id="newsList" class="grid news"></div>
-          <div class="center">
-            <button class="btn outline" id="loadMore">Muat Lebih Banyak</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="galeri">
-        <div class="container">
-          <header class="section-header">
-            <h2>Galeri Kegiatan</h2>
-            <p>Gambar dari Google Drive (public) — cukup simpan ID file/URL.</p>
-          </header>
-          <div class="masonry" id="gallery"></div>
-        </div>
-        <div id="lightbox" class="lightbox" hidden>
-          <button class="lightbox-close" aria-label="Tutup">×</button>
-          <img id="lightbox-img" alt="Pratinjau" />
-          <p id="lightbox-caption"></p>
-        </div>
-      </section>
-
-      <section class="section alt" id="struktur">
-        <div class="container">
-          <header class="section-header">
-            <h2>Struktur Organisasi</h2>
-            <p>Kepengurusan Karang Taruna Cilosari Barat.</p>
-          </header>
-          <div class="org-grid" id="orgGrid"></div>
-        </div>
-      </section>
-
-      <section class="section" id="kontak">
-        <div class="container">
-          <header class="section-header">
-            <h2>Kontak & Media Sosial</h2>
-            <p>Kolaborasi atau pertanyaan? Hubungi kami.</p>
-          </header>
-          <div class="grid contact">
-            <div class="card">
-              <h3>Sekretariat</h3>
-              <p>RT01/RW08, Kelurahan Kemijen<br/>Kecamatan Semarang Timur, Kota Semarang</p>
-              <p><strong>Email:</strong> karangtaruna.cilosari@example.com<br/>
-                 <strong>WhatsApp:</strong> 0812-3456-7890</p>
-              <div class="socials">
-                <a href="https://www.instagram.com/karangtaruna_cilosari" target="_blank" rel="noopener">Instagram</a>
-                <a href="https://www.tiktok.com/@karangtaruna_cilosari" target="_blank" rel="noopener">TikTok</a>
-              </div>
-            </div>
-            <form class="card form" id="formKontak" aria-label="Formulir kontak">
-              <label>Nama<input type="text" name="nama" required></label>
-              <label>Email<input type="email" name="email" required></label>
-              <label>Pesan<textarea name="pesan" rows="4" required></textarea></label>
-              <button class="btn primary" type="submit">Kirim</button>
-              <p class="muted">*Form ini menggunakan <code>mailto:</code> (tanpa backend).</p>
-            </form>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container footer-inner">
-        <div>
-          <div class="brand small">
-            <img src="./assets/logo-kt.svg" alt="Logo Karang Taruna Cilosari Barat" />
-            <span>Karang Taruna Cilosari Barat</span>
-          </div>
-          <p class="muted">© <span id="year"></span> Karang Taruna Cilosari Barat RT01/RW08 — Kemijen, Semarang Timur.</p>
-        </div>
-        <nav class="footer-links">
-          <a href="#program">Program</a>
-          <a href="#berita">Berita</a>
-          <a href="#kontak">Kontak</a>
-        </nav>
+  <!-- === PROGRAM === -->
+  <section class="section alt" id="program">
+    <div class="container">
+      <div class="section-header">
+        <h2>Program & Kegiatan</h2>
+        <p>Kegiatan tahunan Karang Taruna Cilosari Barat</p>
       </div>
-    </footer>
+      <div class="grid programs" id="programList">
+        <!-- data dari Firestore -->
+      </div>
+    </div>
+  </section>
 
-    <a class="wa-float" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
-      <img src="./assets/logo-kt.svg" alt="WA" style="width:28px;height:28px;border-radius:50%">
-    </a>
+  <!-- === BERITA === -->
+  <section class="section" id="berita">
+    <div class="container">
+      <div class="section-header">
+        <h2>Berita & Pengumuman</h2>
+        <p>Informasi terbaru seputar kegiatan Karang Taruna</p>
+      </div>
+      <div class="grid news" id="beritaList">
+        <!-- data dari Firestore -->
+      </div>
+    </div>
+  </section>
 
-    <script type="module" src="./js/main.js"></script>
-    <script>
-      document.getElementById('year').textContent = new Date().getFullYear();
-      const form = document.getElementById('formKontak');
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const data = new FormData(form);
-        const subject = encodeURIComponent('Pesan untuk Karang Taruna Cilosari Barat');
-        const body = encodeURIComponent(`Nama: ${data.get('nama')}
-Email: ${data.get('email')}
-Pesan:
-${data.get('pesan')}`);
-        window.location.href = `mailto:karangtaruna.cilosari@example.com?subject=${subject}&body=${body}`;
-        form.reset();
-        alert('Terima kasih! Silakan kirim email yang terbuka.');
-      });
-    </script>
-  </body>
+  <!-- === GALERI === -->
+  <section class="section alt" id="galeri">
+    <div class="container">
+      <div class="section-header">
+        <h2>Galeri Kegiatan</h2>
+        <p>Potret kebersamaan dan kegiatan sosial warga</p>
+      </div>
+      <div class="masonry" id="galeriList">
+        <!-- gambar dari Google Drive -->
+      </div>
+    </div>
+  </section>
+
+  <!-- === STRUKTUR === -->
+  <section class="section" id="struktur">
+    <div class="container">
+      <div class="section-header">
+        <h2>Struktur Organisasi</h2>
+        <p>Susunan Pengurus Karang Taruna Cilosari Barat</p>
+      </div>
+      <div class="org-grid" id="strukturList">
+        <!-- data dari Firestore -->
+      </div>
+    </div>
+  </section>
+
+  <!-- === KONTAK === -->
+  <section class="section alt" id="kontak">
+    <div class="container contact">
+      <div>
+        <h2>Hubungi Kami</h2>
+        <p>Alamat: Jl. Cilosari Barat RT01/RW08, Kelurahan Kemijen, Kecamatan Semarang Timur</p>
+        <p>WhatsApp: <a href="https://wa.me/6281234567890" target="_blank">+62 812 3456 7890</a></p>
+        <p>Instagram: <a href="https://www.instagram.com/karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
+        <p>TikTok: <a href="https://www.tiktok.com/@karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
+      </div>
+      <iframe 
+        src="https://www.google.com/maps?q=Kemijen,+Semarang+Timur&output=embed"
+        width="100%" height="260" style="border:0" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- === FOOTER === -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <h3>Karang Taruna Cilosari Barat RT01/RW08</h3>
+        <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
+        <p><small>© 2025 Karang Taruna Cilosari Barat. All rights reserved.</small></p>
+      </div>
+      <div>
+        <a href="#beranda">Beranda</a><br>
+        <a href="#program">Program</a><br>
+        <a href="#berita">Berita</a><br>
+        <a href="#galeri">Galeri</a><br>
+        <a href="#struktur">Struktur</a><br>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WA FLOAT -->
+  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
+    <img src="./assets/wa.png" alt="WA" />
+  </a>
+
+  <!-- SCRIPT -->
+  <script>
+    const navToggle=document.getElementById('navToggle');
+    const navLinks=document.getElementById('navLinks');
+    const mobileMenu=document.getElementById('mobileMenu');
+    navToggle.addEventListener('click',()=>{
+      mobileMenu.style.display=mobileMenu.style.display==='flex'?'none':'flex';
+    });
+  </script>
+
+</body>
 </html>
