@@ -1,16 +1,31 @@
-/* Theme Biru-Emas, no image preview; hero uses TikTok iframe */
-:root{
-  --brand:#0e4c92; --brand-2:#0a3566; --accent:#f6c445;
-  --bg:#f7fafc; --text:#0f172a; --muted:#6b7280; --card:#ffffff;
-  --shadow: 0 10px 30px rgba(2,12,27,.08);
+/* === STYLE.CSS — KARTAR CILOSARI BARAT v2.5 UNIVERSAL FIX === */
+/* Tema Biru-Emas dengan hero TikTok fullscreen tanpa pratinjau */
+
+:root {
+  --brand:#0e4c92;
+  --brand-2:#0a3566;
+  --accent:#f6c445;
+  --bg:#f7fafc;
+  --text:#0f172a;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --shadow:0 10px 30px rgba(2,12,27,.08);
 }
+
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.6;
+}
 .container{width:min(1120px,92%);margin:0 auto}
 .skip-link{position:absolute;left:-9999px}
 .skip-link:focus{position:static;padding:.5rem 1rem;background:#fff;border:1px solid var(--brand)}
 
+/* === TOPBAR & NAV === */
 .topbar{background:var(--brand-2);color:#fff;font-size:.9rem}
 .topbar .container{display:flex;justify-content:space-between;align-items:center;padding:.4rem 0}
 .topbar a{color:#fff;opacity:.9;margin-left:1rem;text-decoration:none}
@@ -27,11 +42,17 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .mobile-menu{display:none;flex-direction:column;padding:0 .8rem .8rem}
 .mobile-menu a{padding:.6rem .4rem;text-decoration:none;color:var(--text);border-top:1px solid #eee}
 
-/* HERO TikTok */
+/* === HERO SECTION (TIKTOK VIDEO) === */
 .hero{position:relative;min-height:72vh;display:grid;align-items:center;overflow:hidden}
 .hero-media{position:absolute;inset:0;overflow:hidden}
-.hero-media iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,76,146,.5),rgba(14,76,146,.8))}
+.hero-media iframe{
+  position:absolute;inset:0;width:100%;height:100%;
+  border:0;object-fit:cover;z-index:0;background:#000;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(14,76,146,.5),rgba(14,76,146,.8))
+}
 .hero-content{position:relative;color:#fff;padding:5rem 0;text-shadow:0 1px 2px rgba(0,0,0,.25)}
 .hero h1{font-size:clamp(1.9rem,5.6vw,3.2rem);margin:0 0 .2rem;line-height:1.1}
 .hero p{max-width:65ch;font-size:1.05rem;opacity:.95}
@@ -40,12 +61,12 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .stat{display:flex;flex-direction:column;align-items:center;background:rgba(255,255,255,.12);padding:.7rem 1rem;border-radius:1rem;backdrop-filter:blur(4px)}
 .stat span{font-size:1.5rem;font-weight:800}
 
+/* === SECTION & CARD === */
 .section{padding:4.2rem 0}
 .section.alt{background:#fff}
 .section-header{text-align:center;margin-bottom:2rem}
 .section-header h2{margin:.2rem 0;font-size:2rem}
 .section-header p{color:var(--muted)}
-
 .grid{display:grid;gap:1.2rem}
 .programs{grid-template-columns:repeat(3,1fr)}
 .news{grid-template-columns:repeat(3,1fr)}
@@ -56,21 +77,25 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .masonry{columns:3 260px;column-gap:14px}
 .tile{width:100%;margin:0 0 14px;display:block;border-radius:12px;box-shadow:var(--shadow);break-inside:avoid}
 
+/* === LIGHTBOX === */
 .lightbox{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.65);padding:1rem}
 .lightbox img{max-width:min(92vw,1100px);max-height:72vh;border-radius:14px;background:#fff;box-shadow:var(--shadow)}
 .lightbox p{color:#fff;margin:.6rem 0 0;text-align:center}
 .lightbox-close{position:absolute;top:12px;right:12px;font-size:2rem;border:none;background:transparent;color:#fff;cursor:pointer}
 
+/* === STRUKTUR ORGANISASI === */
 .org-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
 .org-card{background:#fff;border-radius:1rem;box-shadow:var(--shadow);padding:1rem}
 .role{font-size:.85rem;color:var(--muted)}
 
+/* === BUTTONS === */
 .btn{display:inline-block;border-radius:999px;padding:.7rem 1.1rem;text-decoration:none;font-weight:800;border:1px solid transparent;cursor:pointer}
 .btn.primary{background:var(--accent);color:#1f2937}
 .btn.light{background:#fff;color:#111827}
 .btn.outline{background:#fff;border-color:#e5e7eb;color:#111827}
 .btn.small{padding:.5rem .8rem;font-weight:700}
 
+/* === FOOTER === */
 .footer{background:var(--brand-2);color:#fff;padding:2.2rem 0}
 .footer-inner{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem}
 .footer a{color:#fff;text-decoration:none;opacity:.9}
@@ -78,7 +103,74 @@ body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetic
 .wa-float{position:fixed;bottom:18px;right:18px;width:54px;height:54px;display:grid;place-items:center;background:#25D366;border-radius:999px;box-shadow:var(--shadow)}
 .wa-float img{width:28px;height:28px}
 
-@media (max-width:960px){.programs{grid-template-columns:1fr 1fr}.news{grid-template-columns:1fr 1fr}.contact{grid-template-columns:1fr}.org-grid{grid-template-columns:1fr 1fr}.nav-links{display:none}.nav-toggle{display:block}}
-@media (max-width:600px){.programs,.news,.org-grid{grid-template-columns:1fr}.stats{gap:.8rem}}
+/* === RESPONSIVE === */
+@media (max-width:960px){
+  .programs{grid-template-columns:1fr 1fr}
+  .news{grid-template-columns:1fr 1fr}
+  .contact{grid-template-columns:1fr}
+  .org-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:block}
+}
+@media (max-width:600px){
+  .programs,.news,.org-grid{grid-template-columns:1fr}
+  .stats{gap:.8rem}
+}
 
-@media print{.topbar,.navbar,.wa-float,.lightbox,.hero-media,.hero-cta{display:none!important}.hero{min-height:auto;padding:0}.hero-content{color:#000}.section{padding:2rem 0}.card{box-shadow:none;border:1px solid #e5e7eb}}
+/* === PRINT === */
+@media print{
+  .topbar,.navbar,.wa-float,.lightbox,.hero-media,.hero-cta{display:none!important}
+  .hero{min-height:auto;padding:0}
+  .hero-content{color:#000}
+  .section{padding:2rem 0}
+  .card{box-shadow:none;border:1px solid #e5e7eb}
+}
+
+/* === UNIVERSAL FIX: HILANGKAN TULISAN "PRATINJAU" / OVERLAY IFRAME === */
+
+/* 1️⃣ Nonaktifkan semua gesture, callout, overlay media di semua browser */
+iframe {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  pointer-events: auto !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/* 2️⃣ Sembunyikan seluruh elemen pratinjau dan overlay media */
+iframe::-webkit-media-controls-panel,
+iframe::-webkit-media-controls-overlay-play-button,
+iframe::-webkit-media-controls-start-playback-button,
+iframe::-webkit-media-controls,
+iframe::-webkit-preview-container,
+iframe::-internal-media-controls-overlay-cast-button,
+iframe::-moz-media-controls,
+iframe::backdrop {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+
+/* 3️⃣ Pastikan iframe TikTok tetap penuh tanpa placeholder */
+.hero-media iframe {
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* 4️⃣ Hilangkan pseudo overlay tambahan */
+.hero-media iframe::before,
+.hero-media iframe::after {
+  content: '' !important;
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 5️⃣ Hilangkan tap highlight di semua device */
+* { -webkit-tap-highlight-color: transparent !important; }
