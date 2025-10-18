@@ -3,27 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Karang Taruna Cilosari Barat RT01/RW08 Kelurahan Kemijen, Kecamatan Semarang Timur" />
-  <title>Karang Taruna Cilosari Barat RT01/RW08 - Kemijen, Semarang Timur</title>
-
-  <!-- favicon -->
+  <meta name="description" content="Portal Karang Taruna Cilosari Barat RT01/RW08 - Kemijen, Semarang Timur" />
+  <title>Portal Karang Taruna Cilosari Barat RT01/RW08</title>
   <link rel="icon" type="image/png" href="./assets/logo.png" />
-
-  <!-- style -->
   <link rel="stylesheet" href="./css/style.css" />
-
-  <!-- font -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* === Modal Login/Register === */
+    .modal {
+      position: fixed; inset: 0; background: rgba(0,0,0,.6);
+      display: none; align-items: center; justify-content: center;
+      z-index: 1000; padding: 1rem;
+    }
+    .modal.active { display: flex; }
+    .modal-box {
+      background: #fff; border-radius: 12px; width: 100%; max-width: 420px;
+      box-shadow: 0 5px 30px rgba(0,0,0,.2); padding: 2rem; position: relative;
+    }
+    .modal h3 { margin-top: 0; color: #0e4c92; text-align: center; }
+    .modal form { display: grid; gap: .8rem; }
+    .modal label { font-weight: 600; }
+    .modal input { width: 100%; padding: .5rem .7rem; border: 1px solid #ddd; border-radius: 8px; }
+    .modal .btn { width: 100%; text-align: center; }
+    .modal .switch { text-align: center; margin-top: .8rem; font-size: .9rem; }
+    .modal .switch a { color: #0e4c92; cursor: pointer; }
+    .close-modal {
+      position: absolute; top: 10px; right: 14px; background: none;
+      border: none; font-size: 1.4rem; cursor: pointer; color: #666;
+    }
+  </style>
 </head>
-<body>
 
+<body>
   <!-- === TOPBAR === -->
   <div class="topbar">
     <div class="container">
       <span>Karang Taruna Cilosari Barat RT01/RW08</span>
       <div>
-        <a href="#admin">Admin</a>
-        <a href="#kontak">Kontak</a>
+        <a href="#" id="btnLogin">Masuk</a>
+        <a href="./admin.html">Admin</a>
       </div>
     </div>
   </div>
@@ -55,14 +73,12 @@
     </div>
   </nav>
 
-  <!-- === HERO SECTION (VIDEO TANPA PRATINJAU) === -->
+  <!-- === HERO VIDEO === -->
   <section class="hero" id="beranda">
     <video autoplay muted loop playsinline class="hero-video">
-      <source src="./assets/hero-video.mp4" type="video/mp4">
-      Browser Anda tidak mendukung tag video.
+      <source src="./assets/hero-video.mp4" type="video/mp4" />
     </video>
     <div class="hero-overlay"></div>
-
     <div class="container hero-content">
       <h1>Karang Taruna Cilosari Barat RT01/RW08</h1>
       <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
@@ -70,11 +86,6 @@
       <div class="hero-cta">
         <a href="#berita" class="btn primary">Lihat Pengumuman</a>
         <a href="#galeri" class="btn light">Jelajah Galeri</a>
-      </div>
-      <div class="stats">
-        <div class="stat"><span>24</span><small>Kegiatan/Tahun</small></div>
-        <div class="stat"><span>85</span><small>Relawan Aktif</small></div>
-        <div class="stat"><span>11</span><small>RT/RW Kolaborator</small></div>
       </div>
     </div>
   </section>
@@ -84,10 +95,10 @@
     <div class="container">
       <div class="section-header">
         <h2>Program & Kegiatan</h2>
-        <p>Kegiatan tahunan Karang Taruna Cilosari Barat</p>
+        <p>Agenda tahunan dan sosial Karang Taruna Cilosari Barat</p>
       </div>
       <div class="grid programs" id="programList">
-        <!-- data dari Firestore -->
+        <!-- data Firestore -->
       </div>
     </div>
   </section>
@@ -97,36 +108,10 @@
     <div class="container">
       <div class="section-header">
         <h2>Berita & Pengumuman</h2>
-        <p>Informasi terbaru seputar kegiatan Karang Taruna</p>
+        <p>Informasi terbaru seputar kegiatan dan warga</p>
       </div>
       <div class="grid news" id="beritaList">
-        <!-- data dari Firestore -->
-      </div>
-    </div>
-  </section>
-
-  <!-- === GALERI === -->
-  <section class="section alt" id="galeri">
-    <div class="container">
-      <div class="section-header">
-        <h2>Galeri Kegiatan</h2>
-        <p>Potret kebersamaan dan kegiatan sosial warga</p>
-      </div>
-      <div class="masonry" id="galeriList">
-        <!-- gambar dari Google Drive -->
-      </div>
-    </div>
-  </section>
-
-  <!-- === STRUKTUR === -->
-  <section class="section" id="struktur">
-    <div class="container">
-      <div class="section-header">
-        <h2>Struktur Organisasi</h2>
-        <p>Susunan Pengurus Karang Taruna Cilosari Barat</p>
-      </div>
-      <div class="org-grid" id="strukturList">
-        <!-- data dari Firestore -->
+        <!-- data Firestore -->
       </div>
     </div>
   </section>
@@ -141,10 +126,8 @@
         <p>Instagram: <a href="https://www.instagram.com/karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
         <p>TikTok: <a href="https://www.tiktok.com/@karangtaruna_cilosari" target="_blank">@karangtaruna_cilosari</a></p>
       </div>
-      <iframe 
-        src="https://www.google.com/maps?q=Kemijen,+Semarang+Timur&output=embed"
-        width="100%" height="260" style="border:0" allowfullscreen="" loading="lazy">
-      </iframe>
+      <iframe src="https://www.google.com/maps?q=Kemijen,+Semarang+Timur&output=embed"
+        width="100%" height="260" style="border:0" allowfullscreen="" loading="lazy"></iframe>
     </div>
   </section>
 
@@ -154,32 +137,123 @@
       <div>
         <h3>Karang Taruna Cilosari Barat RT01/RW08</h3>
         <p>Kelurahan Kemijen, Kecamatan Semarang Timur</p>
-        <p><small>© 2025 Karang Taruna Cilosari Barat. All rights reserved.</small></p>
+        <small>© 2025 Karang Taruna Cilosari Barat</small>
       </div>
       <div>
-        <a href="#beranda">Beranda</a><br>
-        <a href="#program">Program</a><br>
-        <a href="#berita">Berita</a><br>
-        <a href="#galeri">Galeri</a><br>
-        <a href="#struktur">Struktur</a><br>
+        <a href="#program">Program</a><br />
+        <a href="#berita">Berita</a><br />
+        <a href="#galeri">Galeri</a><br />
+        <a href="#struktur">Struktur</a><br />
       </div>
     </div>
   </footer>
 
-  <!-- WA FLOAT -->
-  <a href="https://wa.me/6281234567890" target="_blank" class="wa-float">
-    <img src="./assets/wa.png" alt="WA" />
-  </a>
+  <!-- === MODAL LOGIN === -->
+  <div class="modal" id="modalAuth">
+    <div class="modal-box">
+      <button class="close-modal" id="closeModal">&times;</button>
 
-  <!-- SCRIPT -->
-  <script>
-    const navToggle=document.getElementById('navToggle');
-    const navLinks=document.getElementById('navLinks');
-    const mobileMenu=document.getElementById('mobileMenu');
-    navToggle.addEventListener('click',()=>{
-      mobileMenu.style.display=mobileMenu.style.display==='flex'?'none':'flex';
+      <!-- LOGIN -->
+      <div id="loginBox">
+        <h3>Masuk Portal Warga</h3>
+        <form id="loginForm">
+          <label>Email</label>
+          <input type="email" id="loginEmail" required />
+          <label>Password</label>
+          <input type="password" id="loginPassword" required />
+          <button class="btn primary" type="submit">Masuk</button>
+        </form>
+        <p class="switch">Belum punya akun? <a id="showRegister">Daftar</a></p>
+      </div>
+
+      <!-- REGISTER -->
+      <div id="registerBox" class="hidden">
+        <h3>Daftar Akun Warga</h3>
+        <form id="registerForm">
+          <label>Nama Lengkap</label>
+          <input type="text" id="regName" required />
+          <label>Email</label>
+          <input type="email" id="regEmail" required />
+          <label>Password</label>
+          <input type="password" id="regPassword" minlength="6" required />
+          <button class="btn primary" type="submit">Daftar</button>
+        </form>
+        <p class="switch">Sudah punya akun? <a id="showLogin">Masuk</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- === SCRIPT === -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getFirestore, setDoc, doc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    // Konfigurasi Firebase
+    const config = window.__ENV || {
+      apiKey: "ISI_APIKEY_KAMU",
+      authDomain: "ISI_AUTHDOMAIN",
+      projectId: "ISI_PROJECTID",
+      storageBucket: "ISI_STORAGEBUCKET",
+      messagingSenderId: "ISI_MSG_ID",
+      appId: "ISI_APPID"
+    };
+    const app = initializeApp(config);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // Modal logic
+    const modal = document.getElementById("modalAuth");
+    const btnLogin = document.getElementById("btnLogin");
+    const closeModal = document.getElementById("closeModal");
+    const loginBox = document.getElementById("loginBox");
+    const registerBox = document.getElementById("registerBox");
+
+    btnLogin.onclick = () => modal.classList.add("active");
+    closeModal.onclick = () => modal.classList.remove("active");
+    document.getElementById("showRegister").onclick = () => { loginBox.classList.add("hidden"); registerBox.classList.remove("hidden"); };
+    document.getElementById("showLogin").onclick = () => { registerBox.classList.add("hidden"); loginBox.classList.remove("hidden"); };
+
+    // Register
+    document.getElementById("registerForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const name = document.getElementById("regName").value;
+      const email = document.getElementById("regEmail").value;
+      const pass = document.getElementById("regPassword").value;
+      try {
+        const cred = await createUserWithEmailAndPassword(auth, email, pass);
+        await updateProfile(cred.user, { displayName: name });
+        await setDoc(doc(db,"users",cred.user.uid),{
+          name,email,role:"warga",createdAt:serverTimestamp()
+        });
+        alert("Pendaftaran berhasil!");
+        registerBox.classList.add("hidden");
+        loginBox.classList.remove("hidden");
+      } catch(err){ alert("Gagal daftar: "+err.message); }
+    });
+
+    // Login
+    document.getElementById("loginForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const email = document.getElementById("loginEmail").value;
+      const pass = document.getElementById("loginPassword").value;
+      try {
+        await signInWithEmailAndPassword(auth,email,pass);
+        alert("Selamat datang kembali!");
+        modal.classList.remove("active");
+      } catch(err){ alert("Gagal login: "+err.message); }
+    });
+
+    // Auth state
+    onAuthStateChanged(auth, (user)=>{
+      if(user){
+        btnLogin.textContent = "Keluar (" + (user.displayName || user.email) + ")";
+        btnLogin.onclick = async()=>{ await signOut(auth); alert("Anda telah keluar."); btnLogin.textContent="Masuk"; };
+      } else {
+        btnLogin.textContent = "Masuk";
+        btnLogin.onclick = ()=> modal.classList.add("active");
+      }
     });
   </script>
-
 </body>
 </html>
